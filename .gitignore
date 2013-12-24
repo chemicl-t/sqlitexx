@@ -1,0 +1,68 @@
+.*
+!.gitignore
+!.gitkeep
+
+*~
+
+# IDE settings
+*.xcodeproj	# Xcode
+/*/*.xcodeproj/
+/*/*.xcodeproj/*.pbxproj
+*.cbp		# code::blocks
+*.vcproj	# Visual C++
+*.vcxproj	# Visual C++
+
+# emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# vim
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# build dir
+bin/debug
+bin/release
+bin/test
+
+# OS X hidden/temp files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# OS X Thumbnails
+._*
+
+# files that might appear on external disk (OS X)
+.Spotlight-V100
+.Trashes
+
+# User-specific project settings
+*.mode1v3
+*.mode2v3
+
+# Windows image thumbnail file
+Thumbs.db
+ehthumbs.db
+
+# Windows folder config file
+Desktop.ini
+
+# recycle Bin used on file shares (Windows)
+$RECYCLE.BIN/
+
+*.swp
+*~.nib
+

@@ -1,33 +1,38 @@
 #define LIBSQLITEXX_USE_UTF8_STRING
 
+#include <vector>
+#include <utility>
+
 #include "sqlitexx.hpp"
 
 namespace sqlite = caprice::sqlitexx;
 
 int main() {
     sqlite::connection db;
-    db.open(u8"test.db");
+    boost::system::error_code ec;
+    
+    db.open(u8"test.db", ec);
     
     sqlite::statement sql(db);
     sql.execute(u8"CREATE TABLE foo(name TEXT, id INTEGER);");
     
-    // begin transaction
-    db.begin_transaction();
-    
-    auto binder1 = sql.compile(u8"INSERT INTO foo VALUES(@name, @id);");
-    
-    std::vector<std:pair<sqlite::sql_string, int>> v
-        = { {"Mrs. Roberts", 1337},
-            {"Robert'); DROP TABLE students;--", 1984},
-            {"Help! I'm trapped in a driver's license factory Elaine Roberts", 327} };
-    
-    for(auto i : v) {
-        binder1["name", i.first]["id", i.second];
-        sql.execute();
+    if(!(auto compiled = sql.compile(u8"INSERT INTO foo VALUES(@name, @id);", ec))) {
+        std::cerr << "error! " << ec.cause() << std::endl;
     }
     
-    // end transaction
-    db.end_transaction();
+    std::vector<std::pair<sqlite::sql_string, int>> table
+        = { {u8"Mrs. Roberts", 1337},
+            {u8"Robert'); DROP TABLE students;--", 1984},
+            {u8"Help! I'm trapped in a driver's license factory Elaine Roberts", 327} };
+    
+    for(auto i : v) {
+        binder1
+            .begin()
+                ["name", i.first]["id", i.second]
+            .end();
+        
+        execute_compiled_statement();
+    }
     
     auto binder2 = sql.compile(u8"INSERT INTO foo VALUES(?, ?);");
     

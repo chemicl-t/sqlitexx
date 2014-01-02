@@ -1,6 +1,12 @@
 #ifndef CAPRICE_SQLITEXX_FUNCTOR_HPP
 #define CAPRICE_SQLITEXX_FUNCTOR_HPP
 
+/// @note now under construction. I can't solve the type-associated problems...
+
+/// @internal
+
+#if 0
+
 #include "deftypes.hpp"
 #include "string.hpp"
 #include "exception.hpp"
@@ -16,13 +22,6 @@ template <typename R, typename ...Args>
 class functor final {
 public:
     functor() = delete;
-    ~functor() = delete;
-};
-
-template <typename R, typename ...Args>
-class functor <R (Args...)> final {
-public:
-    functor() { static_assert(false, "R is not result-set."); }
     ~functor() = delete;
 };
 
@@ -84,5 +83,8 @@ private:
 
 } }
 
+#endif
+
+/// @endinternal
 
 #endif // CAPRICE_SQLITEXX_FUNCTOR_HPP

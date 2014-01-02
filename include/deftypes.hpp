@@ -11,6 +11,9 @@
 namespace boost {
     template <>
     using optional<void> = void;
+    
+    template <>
+    using optional<> = void;
 }
 
 namespace caprice { namespace sqlitexx {

@@ -36,7 +36,7 @@ public:
     using column_type = std::vector<value_type<ColumnIdx>>;
     
 public:
-    #include "column-iterator.hpp"
+    #include "detail/column-iterator.hpp"
     
 private:
     explicit result_set(const result_set_object_type& val) {}

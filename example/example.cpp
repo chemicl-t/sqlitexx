@@ -26,37 +26,53 @@ int main() {
             {u8"Help! I'm trapped in a driver's license factory Elaine Roberts", 327} };
     
     for(auto i : v) {
-        binder1
-            .begin()
-                ["name", i.first]["id", i.second]
+        binder(compiled)
+            .begin(ec)
+                [u8"name", i.first][u8"id", i.second]
             .end();
         
-        execute_compiled_statement();
+        execute_compiled_statement<>(compiled);
     }
     
-    auto binder2 = sql.compile(u8"INSERT INTO foo VALUES(?, ?);");
-    
     try {
-        binder1["name", "boooooo!"]["id", 0]; // invalid
+        // cf: line 29.
+        binder(compiled)
+            .begin()
+                [u8"name", u8"boooooo!"][u8"id", 0];
+            .end();
+        
+        execute_compiled_statement<>(compiled);
     } catch(std::exception& e) {
         std::cout << e.what() << std::endl;
     }
     
-    binder2("booooo!", 0)("hmmm....", 1);
-    sql.execute();
+    auto inserter = sql.compile(u8"INSERT INTO foo VALUES(?, ?);");
     
-    sql.execute(u8"INSERT INTO foo VALUES(?, ?);", "sqlitexx", 2);
-    sql.execute(u8"INSERT INTO foo VALEUS(@name, @id);", {"name", "caprice"}, {"id", 3});
-
-    auto query_func = sql.compile(u8"INSERT INTO foo VALEUS(@name, @id);")
-                         .do_functionize<void (const sql_string&, int)>();
+    binder(inserter)
+        .begin(ec)
+            /* (name, id) */
+            ("booooo!", 0)
+            ("hmmm....", 1)
+        .end();
     
-    query_func("chemicl_t", 4);
-    query_func("Handai Taro", 5);
+    execute_compiled_statement<>(inserter);
+    /*
+    auto query_func
+        = functor<void (const sql_string&, int)>(db, u8"INSERT INTO foo VALEUS(@name, @id);")
     
-    auto l = sql.compile(u8"SELECT name FROM foo;")
-                .do_functionize<result_set<sql_string> ()>();
+    query_func("chemicl_t", 4, ec);
     
+    try {
+        query_func("Handai Taro", 5);
+    } catch(std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
+        
+    auto selector
+        = functor<result_set<sql_string> (const sql_string&)>(db, u8"SELECT name FROM foo;");
+    
+    selector(u8"Handai Taro");
+    */
     db.close();
     
     return 0;

@@ -26,6 +26,7 @@ class compiled_statement {
         db = db_;
         stmt = stmt_;
     }
+    
 public:
     compiled_statement() = delete;
     ~compiled_statement() {}

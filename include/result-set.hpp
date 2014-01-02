@@ -18,16 +18,16 @@ namespace caprice { namespace sqlitexx {
  *  @tparam ColumnTypes
  *  @note result-set is immutable.
  */
-template <typename ColumnType1, typename ...ColumnTypes>
-class result_set : public result_set_flag {
+template <typename ColumnType, typename ...ColumnTypes>
+class result_set {
 public:
-    typedef boost::fusion::vector<ColumnType1, ColumnTypes...> row_type;
+    typedef boost::fusion::vector<ColumnType, ColumnTypes...> row_type;
     typedef std::vector<row_type> result_set_object_type;
     typedef std::size_t size_type;
     
     template <int ColumnIdx>
     using value_type
-        = std::tuple_element<ColumnIdx, std::tuple<ColumnType1, ColumnTypes...>>::type;
+        = std::tuple_element<ColumnIdx, std::tuple<ColumnType, ColumnTypes...>>::type;
     
     template <int RowIdx, int ColumnIdx>
     using element_type = value_type<ColumnIdx>;
@@ -132,16 +132,10 @@ private:
 };
     
 template <>
-class result_set<> : public result_set_flag {
-public:
-    result_set() = delete;
-};
+using result_set<> = void;
 
 template <>
-class result_set<void> : public result_set_flag {
-public:
-    result_set() = delete;
-};
+using result_set<void> = void;
 
 template <typename ...T>
 using boost::optional<result_set<T...>> maybe_result_set;

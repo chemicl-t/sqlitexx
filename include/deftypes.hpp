@@ -6,7 +6,7 @@
 
 #include <boost/optional.hpp>
 
-#include "exceptipon.hpp"
+#include "exception.hpp"
 
 namespace boost {
     template <>

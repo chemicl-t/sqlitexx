@@ -4,7 +4,14 @@
 
 #include <sqlite3.h>
 
+#include <boost/optional.hpp>
+
 #include "exceptipon.hpp"
+
+namespace boost {
+    template <>
+    using optional<void> = void;
+}
 
 namespace caprice { namespace sqlitexx {
 

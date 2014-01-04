@@ -4,13 +4,14 @@
 
 #include <sqlite3.h>
 #include <system_error>
+#include <boost/system.hpp>
 
 namespace caprice { namespace sqlitexx {
 
 class sqlite3_error_category : public std::error_category {
     virtual const char* name() const noexcept override { return "sqlite3"; }
 
-    virtual std::string message(int ev) const override { return sqlite3_errstr(ev); }
+    virtual std::string message(int ev) const override { return ::sqlite3_errstr(ev); }
 
     virtual std::error_condition default_error_condition(int ev) const noexcept override {
         switch (ev) {
@@ -40,7 +41,7 @@ const std::error_category& sqlite3_error_category() {
     return category;
 }
 
-bool check_result(const int result) const noexcept {
+bool check_result(const int result) noexcept {
     return (result == SQLITE_OK);
 }
     

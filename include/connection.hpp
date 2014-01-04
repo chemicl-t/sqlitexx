@@ -96,6 +96,6 @@ private:
 
 } }
 
-#include "detail/connection.hpp
+#include "detail/connection.hpp"
 
 #endif // CAPRICE_SQLITEXX_CONNECTION_HPP

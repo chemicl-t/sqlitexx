@@ -4,7 +4,7 @@
 
 #include <sqlite3.h>
 
-#include <memeory>
+#include <memory>
 
 #include <boost/optional.hpp>
 

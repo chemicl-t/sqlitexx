@@ -57,7 +57,7 @@ private:
     bool param_binding_is_finished;
 };
 
-typedef boost::optional<statement> maybe_statement;
+typedef maybe<statement> maybe_statement;
 
 /** @brief
  *  @param stmt

@@ -3,8 +3,11 @@
 #define CAPRICE_SQLITEXX_EXCEPTION_HPP
 
 #include <sqlite3.h>
+
 #include <system_error>
-#include <boost/system.hpp>
+
+#include <boost/system/error_code.hpp>
+#include <boost/system/system_error.hpp>
 
 namespace caprice { namespace sqlitexx {
 

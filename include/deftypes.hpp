@@ -8,6 +8,8 @@
 
 #include <boost/optional.hpp>
 
+#include "string.hpp"
+
 namespace caprice { namespace sqlitexx {
 
     template <typename T, typename ...U>

@@ -19,8 +19,10 @@ namespace caprice { namespace sqlitexx {
  *  @note result-set is immutable.
  */
 template <typename ColumnType, typename ...ColumnTypes>
-class result_set {
+class result_set_impl {
 public:
+    typedef result_set_impl<ColumnType, ColumnTypes...> self_type;
+    
     typedef boost::fusion::vector<ColumnType, ColumnTypes...> row_type;
     typedef std::vector<row_type> result_set_object_type;
     typedef std::size_t size_type;
@@ -38,12 +40,11 @@ public:
 public:
     #include "detail/column-iterator.hpp"
     
-private:
-    explicit result_set(const result_set_object_type& val) {}
+    /// @brief constructor.
+    explicit result_set_impl(const result_set_object_type& val) : container(val) {}
 
-public:
-    /// destructor.
-    ~result_set() {}
+    /// @brief destructor.
+    ~result_set_impl() {}
     
     /** @brief
      *  @tparam RowIdx
@@ -130,16 +131,19 @@ public:
 private:
     result_set_object_type container;
 };
-    
-template <>
-using result_set<> = void;
 
 template <>
-using result_set<void> = void;
+class result_set_impl <void> { typedef void self_type; }
+
+template <>
+class result_set_impl<> { typedef void self_type; }
 
 template <typename ...T>
-using boost::optional<result_set<T...>> maybe_result_set;
-    
+using result_set = result_set_impl<T...>::self_type;
+
+template <typename ...T>
+using maybe<result_set<T...>> maybe_result_set;
+
 } }
 
 #endif // CAPRICE_SQLITEXX_RESULT_SET_HPP

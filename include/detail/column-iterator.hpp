@@ -12,7 +12,7 @@ class column_iterator {
      *  @note
      */
     explicit
-    column_iterator(result_set::result_set_object_type::iterator& set_itr)
+    column_iterator(result_set_object_type::iterator& set_itr)
         : itr(set_itr) {}
     
 public:
@@ -69,7 +69,7 @@ public:
     bool operator!=(const self_type& other) const { return itr != other.itr; }
     
 private:
-    result_set::result_set_object_type::iterator itr;
+    result_set_object_type::iterator itr;
 };
 
 #endif // CAPRICE_SQLITEXX_COLUMN_ITERATOR_HPP

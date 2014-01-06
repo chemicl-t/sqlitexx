@@ -52,7 +52,7 @@ private:
     sql_statement_type stmt;
 };
 
-typedef boost::optional<compiled_statement> maybe_compiled_statement;
+typedef maybe<compiled_statement> maybe_compiled_statement;
     
 /** @brief
  *  @tparam ColumnTypes

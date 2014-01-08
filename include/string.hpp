@@ -16,7 +16,7 @@ namespace caprice { namespace sqlitexx {
     typedef char u8_char;
     typedef u8_char sql_char;
 
-    #define _sqlSTR(str) (u8 str)
+    #define _sqlSTR(str) (u8##str)
 
 } }
 
@@ -28,7 +28,7 @@ namespace caprice { namespace sqlitexx {
     typedef char16_t u16_char;
     typedef u16_char sql_char;
 
-    #define _sqlSTR(str) (u16 str)
+    #define _sqlSTR(str) (u16##str)
 
 } }
 

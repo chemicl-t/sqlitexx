@@ -2,21 +2,21 @@
 #ifndef CAPRICE_SQLITEXX_EXCEPTION_HPP
 #define CAPRICE_SQLITEXX_EXCEPTION_HPP
 
-#include <sqlite3.h>
-
 #include <system_error>
 
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
 
+#include "deftypes.hpp"
+
 namespace caprice { namespace sqlitexx {
 
 class sqlite3_error_category : public std::error_category {
-    virtual const char* name() const noexcept override { return "sqlite3"; }
+    const char* name() const noexcept override { return "sqlite3"; }
 
-    virtual std::string message(int ev) const override { return ::sqlite3_errstr(ev); }
-
-    virtual std::error_condition default_error_condition(int ev) const noexcept override {
+    std::string message(int ev) const override { return ::sqlite3_errmsg(ev); }
+    
+    std::error_condition default_error_condition(int ev) const noexcept override {
         switch (ev) {
             case SQLITE_OK:
                 return std::error_condition();
@@ -48,7 +48,7 @@ bool check_result(const int result) noexcept {
     return (result == SQLITE_OK);
 }
     
-bool throw_error_code(const bool result, const boost::error_code& ec) {
+bool throw_error_code(const bool result, const boost::system::error_code& ec) {
     if (!result) { throw ec; }
     return result;
 }

@@ -4,7 +4,8 @@
 
 namespace caprice { namespace sqlitexx {
 
-bool connection::open(const sql_string& absolute_path, boost::error_code& ec) noexcept {
+bool
+ connection::open(const sql_string& absolute_path, boost::system::error_code& ec) noexcept {
     if(!opened) {
         boost::algorithm::replace_all(absolute_path, _sqlSTR("\\"), _sqlSTR("/"));
         const sql_string file_uri = _sqlSTR("file://") + absolute_path;

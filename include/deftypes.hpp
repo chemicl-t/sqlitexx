@@ -10,6 +10,12 @@
 
 #include "string.hpp"
 
+#ifdef __APPLE__
+/// TODO: move it to `fixinclude/sqlite3.h'
+extern "C" int sqlite3_open_v2(const char *, sqlite3 **, int, const char *);
+extern "C" int sqlite3_close_v2(sqlite3 *);
+#endif
+
 namespace caprice { namespace sqlitexx {
 
     template <typename T, typename ...U>
@@ -19,10 +25,7 @@ namespace caprice { namespace sqlitexx {
     struct maybe_helper <void, U...> { typedef void self_type; };
     
     template <typename ...T>
-    struct maybe_helper <> { typedef void self_type; };
-    
-    template <typename ...T>
-    using maybe = maybe_helper<T...>::self_type;
+    using maybe = typename maybe_helper<T...>::self_type;
     
     typedef ::sqlite3 raw_db_object_type;
     typedef ::sqlite3_stmt raw_sql_statement_type;

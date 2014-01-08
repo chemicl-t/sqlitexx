@@ -23,7 +23,7 @@ public:
      *  @param src[in] SQL statement.
      *  @param ec[out]
      */
-    maybe_compiled_statement compile(const sql_string& src, boost::error_code& ec) noexcept;
+    maybe_compiled_statement compile(const sql_string& src, boost::system::error_code& ec) noexcept;
     
     /** @brief compile SQL statement.
      *  @warning when you pass multi SQL statements at once, the result is undefined.
@@ -38,7 +38,7 @@ public:
      *  @retval 
      */
     template <typename ...ColumnTypes>
-    maybe_result_set<ColumnTypes...> execute(const sql_string& src, boost::error_code& ec) noexcept;
+    maybe_result_set<ColumnTypes...> execute(const sql_string& src, boost::system::error_code& ec) noexcept;
     
     /** @brief execute SQL statement.
      *  @warning when you pass multi SQL statements at once, the result is undefined.
@@ -67,7 +67,7 @@ typedef maybe<statement> maybe_statement;
 maybe_compiled_statement
  compile_statement(statement& stmt,
                   const sql_string& src,
-                  boost::error_code& ec) noexcept {
+                   boost::system::error_code& ec) noexcept {
     return stmt.compile(src, ec);
 }
 
@@ -88,7 +88,7 @@ maybe_compiled_statement
  */
 template <typename ...ColumnTypes>
 maybe_result_set<ColumnTypes...>
- execute_statement(statement& stmt, const sql_string& src, boost::error_code& ec) noexcept {
+ execute_statement(statement& stmt, const sql_string& src, boost::system::error_code& ec) noexcept {
     return stmt.template execute<ColumnTypes...>(src, ec);
 }
 

@@ -5,7 +5,7 @@
 namespace caprice { namespace sqlitexx {
 
 statement::maybe_compiled_statement
- statement::compile(const sql_string& src, boost::error_code& ec) noexcept {
+ statement::compile(const sql_string& src, boost::system::error_code& ec) noexcept {
     // src is incomplete or empty, or db is unconstructed...
     if(!::sqlite3_complete(src.c_str()) || src.empty() || !db) {
         return boost::none;
@@ -27,7 +27,7 @@ statement::maybe_compiled_statement
     
 template <typename ...ColumnTypes>
 statement::maybe_result_set<ColumnTypes...>
- statement::execute(const sql_string& src, boost::error_code& ec) noexcept {
+ statement::execute(const sql_string& src, boost::system::error_code& ec) noexcept {
     auto v = compile(src, ec);
     
     if(ec) { return boost::none; }

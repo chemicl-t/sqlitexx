@@ -18,7 +18,7 @@ public:
      *  @param ec[out]
      */
     connection(const sql_string& absolute_path,
-               boost::error_code& ec) noexcept {
+               boost::system::error_code& ec) noexcept {
         open(absolute_path, ec);
     }
 
@@ -49,7 +49,7 @@ public:
      *  @retval true success to open the file.
      *          false fail to open the file.
      */
-    bool open(const sql_string& absolute_path, boost::error_code& ec) noexcept;
+    bool open(const sql_string& absolute_path, boost::system::error_code& ec) noexcept;
     
     /** @brief this function is nearly same as 
      *         @link open(const sql_string&, const boost::error_code&) @endlink.

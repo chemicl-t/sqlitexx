@@ -38,7 +38,7 @@ public:
      *          false
      */
     template <typename ...ColumnTypes>
-    maybe_result_set<ColumnTypes...> execute(const boost::error_code& ec) noexcept;
+    maybe_result_set<ColumnTypes...> execute(const boost::system::error_code& ec) noexcept;
     
     /** @breif execute SQL statement which is compiled at @link compile(const sql_string& src) @endlink.
      *  @tparam
@@ -64,7 +64,7 @@ template <typename ...ColumnTypes>
 maybe_result_set<ColumnTypes...>
  execute_compiled_statement(compiled_statement& stmt,
                             const sql_string& src,
-                            boost::error_code& ec) noexcept {
+                            boost::system::error_code& ec) noexcept {
     return stmt.template execute<ColumnTypes...>(src, ec);
 }
 

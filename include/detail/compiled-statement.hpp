@@ -6,7 +6,7 @@ namespace caprice { namespace sqlitexx {
 
 template <typename ...ColumnTypes>
 maybe_result_set<ColumnTypes...>
- compiled_statement::execute(const boost::error_code& ec) noexcept {
+ compiled_statement::execute(const boost::system::error_code& ec) noexcept {
     if(::sqlite3_bind_parameter_count(stmt.get())) {
         // error...
     }

@@ -6,6 +6,7 @@
 
 # IDE settings
 *.xcodeproj	# Xcode
+*.xcodeproj/
 /*/*.xcodeproj/
 /*/*.xcodeproj/*.pbxproj
 *.cbp		# code::blocks

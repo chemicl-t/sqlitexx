@@ -20,7 +20,7 @@ public:
     
     ~binder() { reset(); }
     
-    noexcept_binder begin(boost::error_code& ec) noexcept {
+    noexcept_binder begin(boost::system::error_code& ec) noexcept {
         return noexcept_binder(*this, stmt.stmt, ec);
     }
     

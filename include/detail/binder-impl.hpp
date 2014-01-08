@@ -30,7 +30,7 @@ public:
      *  @param stmt
      *  @param ec[out]
      */
-    binder_impl(binder& parent, sql_statement_type stmt, boost::error_code& ec)
+    binder_impl(binder& parent, sql_statement_type stmt, boost::system::error_code& ec)
         : parent_(parent), stmt_(stmt), cause(ec) noexcept {}
     
     /// @brief destructor.
@@ -88,7 +88,7 @@ public:
 
 private:
     template <typename T>
-    void bind(const int parameter_idx, T val, boost::error_code& ec) noexcept {
+    void bind(const int parameter_idx, T val, boost::system::error_code& ec) noexcept {
         if(!check_result(do_bind(parameter_idx))) {
             // ec...
         }

@@ -1,0 +1,987 @@
+In file included from ../include/sqlitexx.hpp:7:0,
+                 from example.cpp:6:
+../include/deftypes.hpp: In constructor 'caprice::sqlitexx::blob_type::blob_type(caprice::sqlitexx::blob_type::value_type, std::size_t)':
+../include/deftypes.hpp:51:13: error: static assertion failed: this object have not implemented completely yet.
+             static_assert(false, "this object have not implemented completely yet.");
+             ^
+../include/deftypes.hpp: At global scope:
+../include/deftypes.hpp:49:9: warning: unused parameter 'v' [-Wunused-parameter]
+         blob_type(value_type v, std::size_t sz) {
+         ^
+../include/deftypes.hpp:49:9: warning: unused parameter 'sz' [-Wunused-parameter]
+In file included from ../include/sqlitexx.hpp:9:0,
+                 from example.cpp:6:
+../include/exception.hpp: In member function 'virtual std::string caprice::sqlitexx::sqlite3_error_category::message(int) const':
+../include/exception.hpp:17:76: error: invalid conversion from 'int' to 'sqlite3*' [-fpermissive]
+     std::string message(int ev) const override { return ::sqlite3_errmsg(ev); }
+                                                                            ^
+In file included from ../include/sqlitexx.hpp:5:0,
+                 from example.cpp:6:
+/usr/include/sqlite3.h:2758:24: error:   initializing argument 1 of 'const char* sqlite3_errmsg(sqlite3*)' [-fpermissive]
+ SQLITE_API const char *sqlite3_errmsg(sqlite3*);
+                        ^
+In file included from ../include/sqlitexx.hpp:9:0,
+                 from example.cpp:6:
+../include/exception.hpp: In function 'const std::error_category& caprice::sqlitexx::sqlite3_error_category()':
+../include/exception.hpp:43:31: error: 'sqlite3_error_category' does not name a type
+     static thread_local const sqlite3_error_category category;
+                               ^
+../include/exception.hpp:44:12: error: 'category' was not declared in this scope
+     return category;
+            ^
+../include/exception.hpp: At global scope:
+../include/exception.hpp:51:48: error: 'error_code' in namespace 'boost' does not name a type
+ bool throw_error_code(const bool result, const boost::error_code& ec) {
+                                                ^
+../include/exception.hpp:51:67: error: ISO C++ forbids declaration of 'ec' with no type [-fpermissive]
+ bool throw_error_code(const bool result, const boost::error_code& ec) {
+                                                                   ^
+In file included from ../include/sqlitexx.hpp:11:0,
+                 from example.cpp:6:
+../include/connection.hpp:21:23: error: 'boost::error_code' has not been declared
+                boost::error_code& ec) noexcept {
+                       ^
+../include/connection.hpp:52:55: error: 'boost::error_code' has not been declared
+     bool open(const sql_string& absolute_path, boost::error_code& ec) noexcept;
+                                                       ^
+../include/connection.hpp:82:22: error: expected ';' at end of member declaration
+     bool is_opened() noexcept const { return opened; }
+                      ^
+../include/connection.hpp:82:37: error: expected unqualified-id before '{' token
+     bool is_opened() noexcept const { return opened; }
+                                     ^
+../include/connection.hpp:85:41: error: expected ';' at end of member declaration
+     const sql_char *get_error_message() noexcept const {
+                                         ^
+../include/connection.hpp:85:56: error: expected unqualified-id before '{' token
+     const sql_char *get_error_message() noexcept const {
+                                                        ^
+../include/connection.hpp: In constructor 'caprice::sqlitexx::connection::connection(const sql_string&)':
+../include/connection.hpp:32:9: error: 'error_code' is not a member of 'boost'
+         boost::error_code ec;
+         ^
+../include/connection.hpp:32:9: note: suggested alternatives:
+In file included from ../include/exception.hpp:5:0,
+                 from ../include/sqlitexx.hpp:9,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/system_error:116:10: note:   'std::error_code'
+   struct error_code
+          ^
+In file included from ../include/exception.hpp:7:0,
+                 from ../include/sqlitexx.hpp:9,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/system/error_code.hpp:310:11: note:   'boost::system::error_code'
+     class error_code
+           ^
+In file included from ../include/sqlitexx.hpp:11:0,
+                 from example.cpp:6:
+../include/connection.hpp:32:27: error: expected ';' before 'ec'
+         boost::error_code ec;
+                           ^
+../include/connection.hpp:33:46: error: 'ec' was not declared in this scope
+         throw_error_code(open(absolute_path, ec), ec);
+                                              ^
+../include/connection.hpp: In constructor 'caprice::sqlitexx::connection::connection()':
+../include/connection.hpp:40:34: error: expected '{' before 'noexcept'
+     connection() : opened(false) noexcept {}
+                                  ^
+../include/connection.hpp: In member function 'bool caprice::sqlitexx::connection::open(const sql_string&)':
+../include/connection.hpp:64:9: error: 'error_code' is not a member of 'boost'
+         boost::error_code ec;
+         ^
+../include/connection.hpp:64:9: note: suggested alternatives:
+In file included from ../include/exception.hpp:5:0,
+                 from ../include/sqlitexx.hpp:9,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/system_error:116:10: note:   'std::error_code'
+   struct error_code
+          ^
+In file included from ../include/exception.hpp:7:0,
+                 from ../include/sqlitexx.hpp:9,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/system/error_code.hpp:310:11: note:   'boost::system::error_code'
+     class error_code
+           ^
+In file included from ../include/sqlitexx.hpp:11:0,
+                 from example.cpp:6:
+../include/connection.hpp:64:27: error: expected ';' before 'ec'
+         boost::error_code ec;
+                           ^
+../include/connection.hpp:65:62: error: 'ec' was not declared in this scope
+         return opened = throw_error_code(open(absolute_path, ec), ec);
+                                                              ^
+../include/connection.hpp: In member function 'bool caprice::sqlitexx::connection::close()':
+../include/connection.hpp:74:65: error: cannot convert 'caprice::sqlitexx::db_object_type {aka std::shared_ptr<sqlite3>}' to 'sqlite3*' for argument '1' to 'int sqlite3_close_v2(sqlite3*)'
+         if(opened) { opened = check_result(::sqlite3_close_v2(db)); }
+                                                                 ^
+In file included from ../include/connection.hpp:99:0,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+../include/detail/connection.hpp: At global scope:
+../include/detail/connection.hpp:7:63: error: 'boost::error_code' has not been declared
+ bool connection::open(const sql_string& absolute_path, boost::error_code& ec) noexcept {
+                                                               ^
+../include/detail/connection.hpp: In member function 'bool caprice::sqlitexx::connection::open(const sql_string&, int&)':
+../include/detail/connection.hpp:12:26: error: 'SQLITE3_OPEN_READWRITE' was not declared in this scope
+         const int flag = SQLITE3_OPEN_READWRITE |
+                          ^
+../include/detail/connection.hpp:13:26: error: 'SQLITE3_OPEN_CREATE' was not declared in this scope
+                          SQLITE3_OPEN_CREATE    |
+                          ^
+../include/detail/connection.hpp:14:26: error: 'SQLITE3_OPEN_URI' was not declared in this scope
+                          SQLITE3_OPEN_URI       |
+                          ^
+../include/detail/connection.hpp:15:26: error: 'SQLITE3_OPEN_FULLMUTEX' was not declared in this scope
+                          SQLITE3_OPEN_FULLMUTEX ;
+                          ^
+../include/detail/connection.hpp:19:84: error: cannot convert 'const sql_string {aka const std::basic_string<char>}' to 'const char*' for argument '1' to 'int sqlite3_open_v2(const char*, sqlite3**, int, const char*)'
+         if(opened = check_result(::sqlite3_open_v2(file_uri, &raw_db, flag, nullptr))) {
+                                                                                    ^
+../include/detail/connection.hpp: At global scope:
+../include/detail/connection.hpp:7:6: warning: unused parameter 'ec' [-Wunused-parameter]
+ bool connection::open(const sql_string& absolute_path, boost::error_code& ec) noexcept {
+      ^
+In file included from ../include/compiled-statement.hpp:15:0,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/result-set.hpp:32:11: error: expected type-specifier
+         = std::tuple_element<ColumnIdx, std::tuple<ColumnType, ColumnTypes...>>::type;
+           ^
+../include/result-set.hpp:35:26: error: expected type-specifier before 'value_type'
+     using element_type = value_type<ColumnIdx>;
+                          ^
+../include/result-set.hpp:38:37: error: 'value_type' was not declared in this scope
+     using column_type = std::vector<value_type<ColumnIdx>>;
+                                     ^
+../include/result-set.hpp:38:48: error: template argument 1 is invalid
+     using column_type = std::vector<value_type<ColumnIdx>>;
+                                                ^
+../include/result-set.hpp:38:48: error: template argument 2 is invalid
+In file included from ../include/result-set.hpp:41:0,
+                 from ../include/compiled-statement.hpp:15,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/detail/column-iterator.hpp:15:53: error: expected ')' before '&' token
+     column_iterator(result_set_object_type::iterator& set_itr)
+                                                     ^
+../include/detail/column-iterator.hpp:20:13: error: 'result_set' does not name a type
+     typedef result_set::value_type<ColumnIdx> value_type;
+             ^
+../include/detail/column-iterator.hpp:57:5: error: 'value_type' does not name a type
+     value_type operator*() const { return boost::fusion::at_c<ColumnIdx>(*itr); }
+     ^
+../include/detail/column-iterator.hpp:72:5: error: need 'typename' before 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::result_set_object_type::iterator' because 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::result_set_object_type' is a dependent scope
+     result_set_object_type::iterator itr;
+     ^
+In file included from ../include/compiled-statement.hpp:15:0,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/result-set.hpp:54:5: error: 'value_type' does not name a type
+     value_type<ColumnIdx> at() const {
+     ^
+../include/result-set.hpp:64:5: error: 'value_type' does not name a type
+     value_type<ColumnIdx> operator[]() const noexcept {
+     ^
+../include/result-set.hpp:74:5: error: 'value_type' does not name a type
+     value_type<ColumnIdx> at(int row_idx) const {
+     ^
+../include/result-set.hpp:84:5: error: 'value_type' does not name a type
+     value_type<ColumnIdx> operator[](int row_idx) const noexcept {
+     ^
+../include/result-set.hpp:102:5: error: 'column_type' does not name a type
+     column_type<ColumnIdx> column() const {
+     ^
+In file included from ../include/result-set.hpp:41:0,
+                 from ../include/compiled-statement.hpp:15,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/detail/column-iterator.hpp: In copy constructor 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::column_iterator(const self_type&)':
+../include/detail/column-iterator.hpp:26:47: error: 'itr' was not declared in this scope
+     column_iterator(const self_type& other) { itr = other.itr; }
+                                               ^
+../include/detail/column-iterator.hpp: In member function 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::self_type& caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator++()':
+../include/detail/column-iterator.hpp:32:11: error: 'itr' was not declared in this scope
+         ++itr;
+           ^
+../include/detail/column-iterator.hpp: In member function 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::self_type caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator++(int)':
+../include/detail/column-iterator.hpp:39:11: error: 'itr' was not declared in this scope
+         ++itr;
+           ^
+../include/detail/column-iterator.hpp: In member function 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::self_type& caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator--()':
+../include/detail/column-iterator.hpp:45:11: error: 'itr' was not declared in this scope
+         --itr;
+           ^
+../include/detail/column-iterator.hpp: In member function 'caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::self_type caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator--(int)':
+../include/detail/column-iterator.hpp:52:11: error: 'itr' was not declared in this scope
+         --itr;
+           ^
+../include/detail/column-iterator.hpp: In member function 'bool caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator>(const self_type&) const':
+../include/detail/column-iterator.hpp:60:59: error: 'itr' was not declared in this scope
+     bool operator>(const self_type& other) const { return itr > other.itr; }
+                                                           ^
+../include/detail/column-iterator.hpp: In member function 'bool caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator<(const self_type&) const':
+../include/detail/column-iterator.hpp:63:59: error: 'itr' was not declared in this scope
+     bool operator<(const self_type& other) const { return itr < other.itr; }
+                                                           ^
+../include/detail/column-iterator.hpp: In member function 'bool caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator==(const self_type&) const':
+../include/detail/column-iterator.hpp:66:60: error: 'itr' was not declared in this scope
+     bool operator==(const self_type& other) const { return itr == other.itr; }
+                                                            ^
+../include/detail/column-iterator.hpp: In member function 'bool caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_iterator<ColumnIdx>::operator!=(const self_type&) const':
+../include/detail/column-iterator.hpp:69:60: error: 'itr' was not declared in this scope
+     bool operator!=(const self_type& other) const { return itr != other.itr; }
+                                                            ^
+In file included from ../include/compiled-statement.hpp:15:0,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/result-set.hpp: In member function 'constexpr caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::size_type caprice::sqlitexx::result_set_impl<ColumnType, ColumnTypes>::column_size() const':
+../include/result-set.hpp:126:61: error: expected primary-expression before '...' token
+     constexpr size_type column_size() const { return sizeof(...ColumnTypes) + 1; }
+                                                             ^
+../include/result-set.hpp:126:61: error: expected ')' before '...' token
+../include/result-set.hpp: At global scope:
+../include/result-set.hpp:136:56: error: expected ';' after class definition
+ class result_set_impl <void> { typedef void self_type; }
+                                                        ^
+../include/result-set.hpp:139:23: error: wrong number of template arguments (0, should be 1 or more)
+ class result_set_impl<> { typedef void self_type; }
+                       ^
+In file included from ../include/compiled-statement.hpp:15:0,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/result-set.hpp:22:7: error: provided for 'template<class ColumnType, class ... ColumnTypes> class caprice::sqlitexx::result_set_impl'
+ class result_set_impl {
+       ^
+In file included from ../include/compiled-statement.hpp:15:0,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/result-set.hpp:141:1: error: expected unqualified-id before 'template'
+ template <typename ...T>
+ ^
+../include/result-set.hpp:145:12: error: expected '=' before '<' token
+ using maybe<result_set<T...>> maybe_result_set;
+            ^
+../include/result-set.hpp:145:12: error: expected type-specifier before '<' token
+In file included from ../include/statement.hpp:5:0,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/compiled-statement.hpp:41:5: error: 'maybe_result_set' does not name a type
+     maybe_result_set<ColumnTypes...> execute(const boost::error_code& ec) noexcept;
+     ^
+../include/compiled-statement.hpp:49:5: error: 'maybe_result_set' does not name a type
+     maybe_result_set<ColumnTypes...> execute();
+     ^
+../include/compiled-statement.hpp: In constructor 'caprice::sqlitexx::compiled_statement::compiled_statement(caprice::sqlitexx::db_object_type, caprice::sqlitexx::sql_statement_type)':
+../include/compiled-statement.hpp:26:9: error: 'db' was not declared in this scope
+         db = db_;
+         ^
+../include/compiled-statement.hpp: At global scope:
+../include/compiled-statement.hpp:64:1: error: 'maybe_result_set' does not name a type
+ maybe_result_set<ColumnTypes...>
+ ^
+../include/compiled-statement.hpp:77:1: error: 'maybe_result_set' does not name a type
+ maybe_result_set<ColumnTypes...>
+ ^
+In file included from ../include/compiled-statement.hpp:84:0,
+                 from ../include/statement.hpp:5,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/detail/compiled-statement.hpp:8:1: error: 'maybe_result_set' does not name a type
+ maybe_result_set<ColumnTypes...>
+ ^
+../include/detail/compiled-statement.hpp:29:1: error: 'maybe_result_set' does not name a type
+ maybe_result_set<ColumnTypes...>
+ ^
+In file included from ../include/sqlitexx.hpp:12:0,
+                 from example.cpp:6:
+../include/statement.hpp:26:68: error: 'boost::error_code' has not been declared
+     maybe_compiled_statement compile(const sql_string& src, boost::error_code& ec) noexcept;
+                                                                    ^
+../include/statement.hpp:41:5: error: 'maybe_result_set' does not name a type
+     maybe_result_set<ColumnTypes...> execute(const sql_string& src, boost::error_code& ec) noexcept;
+     ^
+../include/statement.hpp:49:5: error: 'maybe_result_set' does not name a type
+     maybe_result_set<ColumnTypes...> execute(const sql_string& src);
+     ^
+../include/statement.hpp:70:26: error: 'boost::error_code' has not been declared
+                   boost::error_code& ec) noexcept {
+                          ^
+../include/statement.hpp:90:1: error: 'maybe_result_set' does not name a type
+ maybe_result_set<ColumnTypes...>
+ ^
+../include/statement.hpp:102:1: error: 'maybe_result_set' does not name a type
+ maybe_result_set<ColumnTypes...>
+ ^
+In file included from ../include/statement.hpp:109:0,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/detail/statement.hpp:7:1: error: 'maybe_compiled_statement' in 'class caprice::sqlitexx::statement' does not name a type
+ statement::maybe_compiled_statement
+ ^
+../include/detail/statement.hpp:18:1: error: 'maybe_compiled_statement' in 'class caprice::sqlitexx::statement' does not name a type
+ statement::maybe_compiled_statement
+ ^
+../include/detail/statement.hpp:29:1: error: 'maybe_result_set' in 'class caprice::sqlitexx::statement' does not name a type
+ statement::maybe_result_set<ColumnTypes...>
+ ^
+../include/detail/statement.hpp:39:1: error: 'maybe_result_set' in 'class caprice::sqlitexx::statement' does not name a type
+ statement::maybe_result_set<ColumnTypes...>
+ ^
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, std::nullptr_t)':
+../include/detail/bind-helper.hpp:16:56: error: '_1' was not declared in this scope
+     return std::bind(::sqlite3_bind_null, stmt_.get(), _1);
+                                                        ^
+../include/detail/bind-helper.hpp:16:56: note: suggested alternatives:
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/memory:79:0,
+                 from ../include/deftypes.hpp:7,
+                 from ../include/sqlitexx.hpp:7,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/functional:1004:34: note:   'std::placeholders::_1'
+     extern const _Placeholder<1> _1;
+                                  ^
+In file included from /Users/caprice/local/include/boost/mpl/aux_/include_preprocessed.hpp:37:0,
+                 from /Users/caprice/local/include/boost/mpl/placeholders.hpp:43,
+                 from /Users/caprice/local/include/boost/iterator/iterator_categories.hpp:17,
+                 from /Users/caprice/local/include/boost/iterator/detail/facade_iterator_category.hpp:7,
+                 from /Users/caprice/local/include/boost/iterator/iterator_facade.hpp:14,
+                 from /Users/caprice/local/include/boost/range/iterator_range_core.hpp:23,
+                 from /Users/caprice/local/include/boost/range/iterator_range.hpp:13,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:16,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+ typedef arg<1> _1;
+                ^
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, double)':
+../include/detail/bind-helper.hpp:21:58: error: '_1' was not declared in this scope
+     return std::bind(::sqlite3_bind_double, stmt_.get(), _1, val);
+                                                          ^
+../include/detail/bind-helper.hpp:21:58: note: suggested alternatives:
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/memory:79:0,
+                 from ../include/deftypes.hpp:7,
+                 from ../include/sqlitexx.hpp:7,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/functional:1004:34: note:   'std::placeholders::_1'
+     extern const _Placeholder<1> _1;
+                                  ^
+In file included from /Users/caprice/local/include/boost/mpl/aux_/include_preprocessed.hpp:37:0,
+                 from /Users/caprice/local/include/boost/mpl/placeholders.hpp:43,
+                 from /Users/caprice/local/include/boost/iterator/iterator_categories.hpp:17,
+                 from /Users/caprice/local/include/boost/iterator/detail/facade_iterator_category.hpp:7,
+                 from /Users/caprice/local/include/boost/iterator/iterator_facade.hpp:14,
+                 from /Users/caprice/local/include/boost/range/iterator_range_core.hpp:23,
+                 from /Users/caprice/local/include/boost/range/iterator_range.hpp:13,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:16,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+ typedef arg<1> _1;
+                ^
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int)':
+../include/detail/bind-helper.hpp:26:55: error: '_1' was not declared in this scope
+     return std::bind(::sqlite3_bind_int, stmt_.get(), _1, val);
+                                                       ^
+../include/detail/bind-helper.hpp:26:55: note: suggested alternatives:
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/memory:79:0,
+                 from ../include/deftypes.hpp:7,
+                 from ../include/sqlitexx.hpp:7,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/functional:1004:34: note:   'std::placeholders::_1'
+     extern const _Placeholder<1> _1;
+                                  ^
+In file included from /Users/caprice/local/include/boost/mpl/aux_/include_preprocessed.hpp:37:0,
+                 from /Users/caprice/local/include/boost/mpl/placeholders.hpp:43,
+                 from /Users/caprice/local/include/boost/iterator/iterator_categories.hpp:17,
+                 from /Users/caprice/local/include/boost/iterator/detail/facade_iterator_category.hpp:7,
+                 from /Users/caprice/local/include/boost/iterator/iterator_facade.hpp:14,
+                 from /Users/caprice/local/include/boost/range/iterator_range_core.hpp:23,
+                 from /Users/caprice/local/include/boost/range/iterator_range.hpp:13,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:16,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+ typedef arg<1> _1;
+                ^
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int64_t)':
+../include/detail/bind-helper.hpp:33:22: error: '_1' was not declared in this scope
+                      _1,
+                      ^
+../include/detail/bind-helper.hpp:33:22: note: suggested alternatives:
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/memory:79:0,
+                 from ../include/deftypes.hpp:7,
+                 from ../include/sqlitexx.hpp:7,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/functional:1004:34: note:   'std::placeholders::_1'
+     extern const _Placeholder<1> _1;
+                                  ^
+In file included from /Users/caprice/local/include/boost/mpl/aux_/include_preprocessed.hpp:37:0,
+                 from /Users/caprice/local/include/boost/mpl/placeholders.hpp:43,
+                 from /Users/caprice/local/include/boost/iterator/iterator_categories.hpp:17,
+                 from /Users/caprice/local/include/boost/iterator/detail/facade_iterator_category.hpp:7,
+                 from /Users/caprice/local/include/boost/iterator/iterator_facade.hpp:14,
+                 from /Users/caprice/local/include/boost/range/iterator_range_core.hpp:23,
+                 from /Users/caprice/local/include/boost/range/iterator_range.hpp:13,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:16,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+ typedef arg<1> _1;
+                ^
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const caprice::sqlitexx::blob_type&)':
+../include/detail/bind-helper.hpp:41:22: error: '_1' was not declared in this scope
+                      _1,
+                      ^
+../include/detail/bind-helper.hpp:41:22: note: suggested alternatives:
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/memory:79:0,
+                 from ../include/deftypes.hpp:7,
+                 from ../include/sqlitexx.hpp:7,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/functional:1004:34: note:   'std::placeholders::_1'
+     extern const _Placeholder<1> _1;
+                                  ^
+In file included from /Users/caprice/local/include/boost/mpl/aux_/include_preprocessed.hpp:37:0,
+                 from /Users/caprice/local/include/boost/mpl/placeholders.hpp:43,
+                 from /Users/caprice/local/include/boost/iterator/iterator_categories.hpp:17,
+                 from /Users/caprice/local/include/boost/iterator/detail/facade_iterator_category.hpp:7,
+                 from /Users/caprice/local/include/boost/iterator/iterator_facade.hpp:14,
+                 from /Users/caprice/local/include/boost/range/iterator_range_core.hpp:23,
+                 from /Users/caprice/local/include/boost/range/iterator_range.hpp:13,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:16,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+ typedef arg<1> _1;
+                ^
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp:42:32: error: passing 'const caprice::sqlitexx::blob_type' as 'this' argument of 'sqlite3_blob* caprice::sqlitexx::blob_type::value()' discards qualifiers [-fpermissive]
+                      val.value(),
+                                ^
+../include/detail/bind-helper.hpp:43:31: error: passing 'const caprice::sqlitexx::blob_type' as 'this' argument of 'std::size_t caprice::sqlitexx::blob_type::size()' discards qualifiers [-fpermissive]
+                      val.size(),
+                               ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const sql_string&)':
+../include/detail/bind-helper.hpp:51:22: error: '_1' was not declared in this scope
+                      _1,
+                      ^
+../include/detail/bind-helper.hpp:51:22: note: suggested alternatives:
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/memory:79:0,
+                 from ../include/deftypes.hpp:7,
+                 from ../include/sqlitexx.hpp:7,
+                 from example.cpp:6:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/functional:1004:34: note:   'std::placeholders::_1'
+     extern const _Placeholder<1> _1;
+                                  ^
+In file included from /Users/caprice/local/include/boost/mpl/aux_/include_preprocessed.hpp:37:0,
+                 from /Users/caprice/local/include/boost/mpl/placeholders.hpp:43,
+                 from /Users/caprice/local/include/boost/iterator/iterator_categories.hpp:17,
+                 from /Users/caprice/local/include/boost/iterator/detail/facade_iterator_category.hpp:7,
+                 from /Users/caprice/local/include/boost/iterator/iterator_facade.hpp:14,
+                 from /Users/caprice/local/include/boost/range/iterator_range_core.hpp:23,
+                 from /Users/caprice/local/include/boost/range/iterator_range.hpp:13,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:16,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+ typedef arg<1> _1;
+                ^
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+/Users/caprice/local/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:29:16: note:   'mpl_::_1'
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp:53:42: error: 'char_type' is not a member of 'caprice::sqlitexx::sql_string {aka std::basic_string<char>}'
+                      val.size() * sizeof(sql_string::char_type),
+                                          ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, T)':
+../include/detail/bind-helper.hpp:63:5: error: static assertion failed: SQLite does't have the function that takes a type `T'
+     static_assert(false, "SQLite does't have the function that takes a type `T'");
+     ^
+../include/detail/bind-helper.hpp:64:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+In file included from ../include/binder.hpp:13:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/binder-impl.hpp: At global scope:
+../include/detail/binder-impl.hpp:33:23: error: expected ')' before '&' token
+     binder_impl(binder& parent, sql_statement_type stmt, boost::error_code& ec)
+                       ^
+../include/detail/binder-impl.hpp:62:5: error: 'binder' does not name a type
+     binder& operator[](const u8_string& parameter_name, T val) noexcept {
+     ^
+../include/detail/binder-impl.hpp:72:5: error: 'binder' does not name a type
+     binder& operator[](const int parameter_id, T val) noexcept {
+     ^
+../include/detail/binder-impl.hpp:80:5: error: 'binder' does not name a type
+     binder& operator[](T val) noexcept {
+     ^
+../include/detail/binder-impl.hpp:91:54: error: 'boost::error_code' has not been declared
+     void bind(const int parameter_idx, T val, boost::error_code& ec) noexcept {
+                                                      ^
+../include/detail/binder-impl.hpp:97:5: error: 'error_code' in namespace 'boost' does not name a type
+     boost::error_code& cause;
+     ^
+../include/detail/binder-impl.hpp:98:5: error: 'binder' does not name a type
+     binder& parent_;
+     ^
+../include/detail/binder-impl.hpp: In member function 'void caprice::sqlitexx::binder_impl<caprice::sqlitexx::noexcept_tag>::bind(int, T, int&)':
+../include/detail/binder-impl.hpp:92:47: error: no matching function for call to 'do_bind(const int&)'
+         if(!check_result(do_bind(parameter_idx))) {
+                                               ^
+../include/detail/binder-impl.hpp:92:47: note: candidates are:
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp:15:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, std::nullptr_t)
+  do_bind(sql_statement_type stmt_, std::nullptr_t /* tag */) noexcept {
+  ^
+../include/detail/bind-helper.hpp:15:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:20:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, double)
+  do_bind(sql_statement_type stmt_, const double val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:20:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:25:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int)
+  do_bind(sql_statement_type stmt_, const int val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:25:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:30:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int64_t)
+  do_bind(sql_statement_type stmt_, const std::int64_t val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:30:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:38:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const caprice::sqlitexx::blob_type&)
+  do_bind(sql_statement_type stmt_, const blob_type& val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:38:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:48:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const sql_string&)
+  do_bind(sql_statement_type stmt_, const sql_string& val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:48:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:62:2: note: template<class T> caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, T)
+  do_bind(sql_statement_type stmt_, T val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:62:2: note:   template argument deduction/substitution failed:
+In file included from ../include/binder.hpp:13:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/binder-impl.hpp:92:47: note:   cannot convert 'parameter_idx' (type 'const int') to type 'caprice::sqlitexx::sql_statement_type {aka std::shared_ptr<sqlite3_stmt>}'
+         if(!check_result(do_bind(parameter_idx))) {
+                                               ^
+../include/detail/binder-impl.hpp: At global scope:
+../include/detail/binder-impl.hpp:107:23: error: expected ')' before '&' token
+     binder_impl(binder& parent, sql_statement_type stmt)
+                       ^
+../include/detail/binder-impl.hpp:135:5: error: 'binder' does not name a type
+     binder& operator[](const u8_string& parameter_name, T val) {
+     ^
+../include/detail/binder-impl.hpp:146:5: error: 'binder' does not name a type
+     binder& operator[](const int parameter_id, T val) {
+     ^
+../include/detail/binder-impl.hpp:156:5: error: 'binder' does not name a type
+     binder& operator[](T val) {
+     ^
+../include/detail/binder-impl.hpp:173:5: error: 'binder' does not name a type
+     binder& parent_;
+     ^
+../include/detail/binder-impl.hpp: In member function 'void caprice::sqlitexx::binder_impl<caprice::sqlitexx::except_tag>::bind(int, T)':
+../include/detail/binder-impl.hpp:168:47: error: no matching function for call to 'do_bind(const int&)'
+         if(!check_result(do_bind(parameter_idx))) {
+                                               ^
+../include/detail/binder-impl.hpp:168:47: note: candidates are:
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp:15:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, std::nullptr_t)
+  do_bind(sql_statement_type stmt_, std::nullptr_t /* tag */) noexcept {
+  ^
+../include/detail/bind-helper.hpp:15:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:20:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, double)
+  do_bind(sql_statement_type stmt_, const double val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:20:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:25:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int)
+  do_bind(sql_statement_type stmt_, const int val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:25:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:30:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int64_t)
+  do_bind(sql_statement_type stmt_, const std::int64_t val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:30:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:38:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const caprice::sqlitexx::blob_type&)
+  do_bind(sql_statement_type stmt_, const blob_type& val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:38:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:48:2: note: caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const sql_string&)
+  do_bind(sql_statement_type stmt_, const sql_string& val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:48:2: note:   candidate expects 2 arguments, 1 provided
+../include/detail/bind-helper.hpp:62:2: note: template<class T> caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, T)
+  do_bind(sql_statement_type stmt_, T val) noexcept {
+  ^
+../include/detail/bind-helper.hpp:62:2: note:   template argument deduction/substitution failed:
+In file included from ../include/binder.hpp:13:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/binder-impl.hpp:168:47: note:   cannot convert 'parameter_idx' (type 'const int') to type 'caprice::sqlitexx::sql_statement_type {aka std::shared_ptr<sqlite3_stmt>}'
+         if(!check_result(do_bind(parameter_idx))) {
+                                               ^
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp: At global scope:
+../include/binder.hpp:23:34: error: 'boost::error_code' has not been declared
+     noexcept_binder begin(boost::error_code& ec) noexcept {
+                                  ^
+../include/binder.hpp: In member function 'caprice::sqlitexx::noexcept_binder caprice::sqlitexx::binder::begin(int&)':
+../include/binder.hpp:24:52: error: no matching function for call to 'caprice::sqlitexx::binder_impl<caprice::sqlitexx::noexcept_tag>::binder_impl(caprice::sqlitexx::binder&, caprice::sqlitexx::sql_statement_type&, int&)'
+         return noexcept_binder(*this, stmt.stmt, ec);
+                                                    ^
+../include/binder.hpp:24:52: note: candidates are:
+In file included from ../include/binder.hpp:13:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/binder-impl.hpp:26:7: note: caprice::sqlitexx::binder_impl<caprice::sqlitexx::noexcept_tag>::binder_impl()
+ class binder_impl<noexcept_tag> final {
+       ^
+../include/detail/binder-impl.hpp:26:7: note:   candidate expects 0 arguments, 3 provided
+../include/detail/binder-impl.hpp:26:7: note: caprice::sqlitexx::binder_impl<caprice::sqlitexx::noexcept_tag>::binder_impl(const caprice::sqlitexx::binder_impl<caprice::sqlitexx::noexcept_tag>&)
+../include/detail/binder-impl.hpp:26:7: note:   candidate expects 1 argument, 3 provided
+In file included from ../include/statement.hpp:5:0,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/compiled-statement.hpp:52:24: error: 'caprice::sqlitexx::sql_statement_type caprice::sqlitexx::compiled_statement::stmt' is private
+     sql_statement_type stmt;
+                        ^
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp:24:44: error: within this context
+         return noexcept_binder(*this, stmt.stmt, ec);
+                                            ^
+../include/binder.hpp: In member function 'caprice::sqlitexx::except_binder caprice::sqlitexx::binder::begin()':
+../include/binder.hpp:28:46: error: no matching function for call to 'caprice::sqlitexx::binder_impl<caprice::sqlitexx::except_tag>::binder_impl(caprice::sqlitexx::binder&, caprice::sqlitexx::sql_statement_type&)'
+         return except_binder(*this, stmt.stmt);
+                                              ^
+../include/binder.hpp:28:46: note: candidates are:
+In file included from ../include/binder.hpp:13:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/binder-impl.hpp:104:7: note: caprice::sqlitexx::binder_impl<caprice::sqlitexx::except_tag>::binder_impl()
+ class binder_impl<except_tag> final {
+       ^
+../include/detail/binder-impl.hpp:104:7: note:   candidate expects 0 arguments, 2 provided
+../include/detail/binder-impl.hpp:104:7: note: caprice::sqlitexx::binder_impl<caprice::sqlitexx::except_tag>::binder_impl(const caprice::sqlitexx::binder_impl<caprice::sqlitexx::except_tag>&)
+../include/detail/binder-impl.hpp:104:7: note:   candidate expects 1 argument, 2 provided
+In file included from ../include/statement.hpp:5:0,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/compiled-statement.hpp:52:24: error: 'caprice::sqlitexx::sql_statement_type caprice::sqlitexx::compiled_statement::stmt' is private
+     sql_statement_type stmt;
+                        ^
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp:28:42: error: within this context
+         return except_binder(*this, stmt.stmt);
+                                          ^
+In file included from ../include/statement.hpp:5:0,
+                 from ../include/sqlitexx.hpp:12,
+                 from example.cpp:6:
+../include/compiled-statement.hpp: In member function 'void caprice::sqlitexx::binder::reset()':
+../include/compiled-statement.hpp:52:24: error: 'caprice::sqlitexx::sql_statement_type caprice::sqlitexx::compiled_statement::stmt' is private
+     sql_statement_type stmt;
+                        ^
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp:31:59: error: within this context
+     void reset() noexcept { ::sqlite3_clear_bindings(stmt.stmt); }
+                                                           ^
+../include/binder.hpp:31:63: error: cannot convert 'caprice::sqlitexx::sql_statement_type {aka std::shared_ptr<sqlite3_stmt>}' to 'sqlite3_stmt*' for argument '1' to 'int sqlite3_clear_bindings(sqlite3_stmt*)'
+     void reset() noexcept { ::sqlite3_clear_bindings(stmt.stmt); }
+                                                               ^
+example.cpp: In function 'int main()':
+example.cpp:14:28: error: no matching function for call to 'caprice::sqlitexx::connection::open(const char [8], boost::system::error_code&)'
+     db.open(u8"test.db", ec);
+                            ^
+example.cpp:14:28: note: candidates are:
+In file included from ../include/connection.hpp:99:0,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+../include/detail/connection.hpp:7:6: note: bool caprice::sqlitexx::connection::open(const sql_string&, int&)
+ bool connection::open(const sql_string& absolute_path, boost::error_code& ec) noexcept {
+      ^
+../include/detail/connection.hpp:7:6: note:   no known conversion for argument 2 from 'boost::system::error_code' to 'int&'
+In file included from ../include/sqlitexx.hpp:11:0,
+                 from example.cpp:6:
+../include/connection.hpp:63:10: note: bool caprice::sqlitexx::connection::open(const sql_string&)
+     bool open(const sql_string& absolute_path) {
+          ^
+../include/connection.hpp:63:10: note:   candidate expects 1 argument, 2 provided
+example.cpp:17:9: error: 'class caprice::sqlitexx::statement' has no member named 'execute'
+     sql.execute(u8"CREATE TABLE foo(name TEXT, id INTEGER);");
+         ^
+example.cpp:19:15: error: invalid use of 'auto'
+     if(!(auto compiled = sql.compile(u8"INSERT INTO foo VALUES(@name, @id);", ec))) {
+               ^
+example.cpp:19:15: error: invalid use of 'auto'
+example.cpp:19:10: error: expected primary-expression before 'auto'
+     if(!(auto compiled = sql.compile(u8"INSERT INTO foo VALUES(@name, @id);", ec))) {
+          ^
+example.cpp:19:10: error: expected ')' before 'auto'
+example.cpp:23:5: error: expected ')' before 'std'
+     std::vector<std::pair<sqlite::sql_string, int>> table
+     ^
+example.cpp:26:88: warning: suggest braces around empty body in an 'if' statement [-Wempty-body]
+             {u8"Help! I'm trapped in a driver's license factory Elaine Roberts", 327} };
+                                                                                        ^
+example.cpp:28:18: error: 'v' was not declared in this scope
+     for(auto i : v) {
+                  ^
+example.cpp:29:16: error: 'compiled' was not declared in this scope
+         binder(compiled)
+                ^
+example.cpp:29:24: error: 'binder' was not declared in this scope
+         binder(compiled)
+                        ^
+example.cpp:29:24: note: suggested alternative:
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp:17:7: note:   'caprice::sqlitexx::binder'
+ class binder final {
+       ^
+example.cpp:34:9: error: 'execute_compiled_statement' was not declared in this scope
+         execute_compiled_statement<>(compiled);
+         ^
+example.cpp:34:36: error: expected primary-expression before '>' token
+         execute_compiled_statement<>(compiled);
+                                    ^
+example.cpp:39:16: error: 'compiled' was not declared in this scope
+         binder(compiled)
+                ^
+example.cpp:39:24: error: 'binder' was not declared in this scope
+         binder(compiled)
+                        ^
+example.cpp:39:24: note: suggested alternative:
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp:17:7: note:   'caprice::sqlitexx::binder'
+ class binder final {
+       ^
+example.cpp:41:28: warning: left operand of comma operator has no effect [-Wunused-value]
+                 [u8"name", u8"boooooo!"][u8"id", 0];
+                            ^
+example.cpp:41:50: warning: left operand of comma operator has no effect [-Wunused-value]
+                 [u8"name", u8"boooooo!"][u8"id", 0];
+                                                  ^
+example.cpp:42:13: error: expected primary-expression before '.' token
+             .end();
+             ^
+example.cpp:44:9: error: 'execute_compiled_statement' was not declared in this scope
+         execute_compiled_statement<>(compiled);
+         ^
+example.cpp:44:36: error: expected primary-expression before '>' token
+         execute_compiled_statement<>(compiled);
+                                    ^
+example.cpp:51:20: error: 'binder' was not declared in this scope
+     binder(inserter)
+                    ^
+example.cpp:51:20: note: suggested alternative:
+In file included from ../include/sqlitexx.hpp:13:0,
+                 from example.cpp:6:
+../include/binder.hpp:17:7: note:   'caprice::sqlitexx::binder'
+ class binder final {
+       ^
+example.cpp:58:5: error: 'execute_compiled_statement' was not declared in this scope
+     execute_compiled_statement<>(inserter);
+     ^
+example.cpp:58:32: error: expected primary-expression before '>' token
+     execute_compiled_statement<>(inserter);
+                                ^
+In file included from /Users/caprice/local/include/boost/algorithm/string/find_format.hpp:24:0,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:22,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp: In instantiation of 'void boost::algorithm::detail::find_format_all_impl2(InputT&, FinderT, FormatterT, FindResultT, FormatResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >; FormatResultT = boost::iterator_range<const char*>]':
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:265:47:   required from 'void boost::algorithm::detail::find_format_all_impl(InputT&, FinderT, FormatterT, FindResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >]'
+/Users/caprice/local/include/boost/algorithm/string/find_format.hpp:272:67:   required from 'void boost::algorithm::find_format_all(SequenceT&, FinderT, FormatterT) [with SequenceT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >]'
+/Users/caprice/local/include/boost/algorithm/string/replace.hpp:657:61:   required from 'void boost::algorithm::replace_all(SequenceT&, const Range1T&, const Range2T&) [with SequenceT = const std::basic_string<char>; Range1T = char [2]; Range2T = char [2]]'
+../include/detail/connection.hpp:9:81:   required from here
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:239:93: error: could not convert 'InsertIt' from 'input_iterator_type {aka __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >}' to 'std::basic_string<char>::iterator {aka __gnu_cxx::__normal_iterator<char*, std::basic_string<char> >}'
+                     ::boost::algorithm::detail::erase( Input, InsertIt, ::boost::end(Input) );
+                                                                                             ^
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:244:116: error: no matching function for call to 'insert(const std::basic_string<char>&, boost::range_iterator<const std::basic_string<char> >::type, std::deque<char, std::allocator<char> >::iterator, std::deque<char, std::allocator<char> >::iterator)'
+                     ::boost::algorithm::detail::insert( Input, ::boost::end(Input), Storage.begin(), Storage.end() );
+                                                                                                                    ^
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:244:116: note: candidates are:
+In file included from /Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:18:0,
+                 from /Users/caprice/local/include/boost/algorithm/string/detail/find_format.hpp:19,
+                 from /Users/caprice/local/include/boost/algorithm/string/find_format.hpp:23,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:22,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/algorithm/string/detail/sequence.hpp:29:25: note: void boost::algorithm::detail::insert(InputT&, typename InputT::iterator, ForwardIteratorT, ForwardIteratorT) [with InputT = const std::basic_string<char>; ForwardIteratorT = std::_Deque_iterator<char, char&, char*>; typename InputT::iterator = __gnu_cxx::__normal_iterator<char*, std::basic_string<char> >]
+             inline void insert(
+                         ^
+/Users/caprice/local/include/boost/algorithm/string/detail/sequence.hpp:29:25: note:   no known conversion for argument 2 from 'boost::range_iterator<const std::basic_string<char> >::type {aka __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >}' to 'std::basic_string<char>::iterator {aka __gnu_cxx::__normal_iterator<char*, std::basic_string<char> >}'
+/Users/caprice/local/include/boost/algorithm/string/detail/sequence.hpp:39:25: note: template<class InputT, class InsertT> void boost::algorithm::detail::insert(InputT&, typename InputT::iterator, const InsertT&)
+             inline void insert(
+                         ^
+/Users/caprice/local/include/boost/algorithm/string/detail/sequence.hpp:39:25: note:   template argument deduction/substitution failed:
+In file included from /Users/caprice/local/include/boost/algorithm/string/find_format.hpp:24:0,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:22,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:244:116: note:   candidate expects 3 arguments, 4 provided
+                     ::boost::algorithm::detail::insert( Input, ::boost::end(Input), Storage.begin(), Storage.end() );
+                                                                                                                    ^
+In file included from /Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:18:0,
+                 from /Users/caprice/local/include/boost/algorithm/string/detail/find_format.hpp:19,
+                 from /Users/caprice/local/include/boost/algorithm/string/find_format.hpp:23,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:22,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/algorithm/string/detail/sequence.hpp: In instantiation of 'typename InputT::iterator boost::algorithm::detail::erase(InputT&, typename InputT::iterator, typename InputT::iterator) [with InputT = const std::basic_string<char>; typename InputT::iterator = __gnu_cxx::__normal_iterator<char*, std::basic_string<char> >]':
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:239:93:   required from 'void boost::algorithm::detail::find_format_all_impl2(InputT&, FinderT, FormatterT, FindResultT, FormatResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >; FormatResultT = boost::iterator_range<const char*>]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:265:47:   required from 'void boost::algorithm::detail::find_format_all_impl(InputT&, FinderT, FormatterT, FindResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >]'
+/Users/caprice/local/include/boost/algorithm/string/find_format.hpp:272:67:   required from 'void boost::algorithm::find_format_all(SequenceT&, FinderT, FormatterT) [with SequenceT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >]'
+/Users/caprice/local/include/boost/algorithm/string/replace.hpp:657:61:   required from 'void boost::algorithm::replace_all(SequenceT&, const Range1T&, const Range2T&) [with SequenceT = const std::basic_string<char>; Range1T = char [2]; Range2T = char [2]]'
+../include/detail/connection.hpp:9:81:   required from here
+/Users/caprice/local/include/boost/algorithm/string/detail/sequence.hpp:59:46: error: passing 'const std::basic_string<char>' as 'this' argument of 'std::basic_string<_CharT, _Traits, _Alloc>::iterator std::basic_string<_CharT, _Traits, _Alloc>::erase(std::basic_string<_CharT, _Traits, _Alloc>::iterator, std::basic_string<_CharT, _Traits, _Alloc>::iterator) [with _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>; std::basic_string<_CharT, _Traits, _Alloc>::iterator = __gnu_cxx::__normal_iterator<char*, std::basic_string<char> >; typename _Alloc::rebind<_CharT>::other::pointer = char*]' discards qualifiers [-fpermissive]
+                 return Input.erase( From, To );
+                                              ^
+In file included from /Users/caprice/local/include/boost/algorithm/string/detail/find_format.hpp:19:0,
+                 from /Users/caprice/local/include/boost/algorithm/string/find_format.hpp:23,
+                 from /Users/caprice/local/include/boost/algorithm/string/replace.hpp:22,
+                 from ../include/connection.hpp:5,
+                 from ../include/sqlitexx.hpp:11,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp: In instantiation of 'ForwardIteratorT boost::algorithm::detail::process_segment_helper<HasStableIterators>::operator()(StorageT&, InputT&, ForwardIteratorT, ForwardIteratorT, ForwardIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; InputT = const std::basic_string<char>; ForwardIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >; bool HasStableIterators = false]':
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:151:84:   required from 'ForwardIteratorT boost::algorithm::detail::process_segment(StorageT&, InputT&, ForwardIteratorT, ForwardIteratorT, ForwardIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; InputT = const std::basic_string<char>; ForwardIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:216:35:   required from 'void boost::algorithm::detail::find_format_all_impl2(InputT&, FinderT, FormatterT, FindResultT, FormatResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >; FormatResultT = boost::iterator_range<const char*>]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:265:47:   required from 'void boost::algorithm::detail::find_format_all_impl(InputT&, FinderT, FormatterT, FindResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >]'
+/Users/caprice/local/include/boost/algorithm/string/find_format.hpp:272:67:   required from 'void boost::algorithm::find_format_all(SequenceT&, FinderT, FormatterT) [with SequenceT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >]'
+/Users/caprice/local/include/boost/algorithm/string/replace.hpp:657:61:   required from 'void boost::algorithm::replace_all(SequenceT&, const Range1T&, const Range2T&) [with SequenceT = const std::basic_string<char>; Range1T = char [2]; Range2T = char [2]]'
+../include/detail/connection.hpp:9:81:   required from here
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:99:32: error: assignment of read-only location 'It.__gnu_cxx::__normal_iterator<_Iterator, _Container>::operator*<const char*, std::basic_string<char> >()'
+                             *It=Storage.front();
+                                ^
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp: In instantiation of 'OutputIteratorT boost::algorithm::detail::move_from_storage(StorageT&, OutputIteratorT, OutputIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; OutputIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >]':
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:71:120:   required from 'ForwardIteratorT boost::algorithm::detail::process_segment_helper<HasStableIterators>::operator()(StorageT&, InputT&, ForwardIteratorT, ForwardIteratorT, ForwardIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; InputT = const std::basic_string<char>; ForwardIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >; bool HasStableIterators = false]'
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:151:84:   required from 'ForwardIteratorT boost::algorithm::detail::process_segment(StorageT&, InputT&, ForwardIteratorT, ForwardIteratorT, ForwardIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; InputT = const std::basic_string<char>; ForwardIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:216:35:   required from 'void boost::algorithm::detail::find_format_all_impl2(InputT&, FinderT, FormatterT, FindResultT, FormatResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >; FormatResultT = boost::iterator_range<const char*>]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:265:47:   required from 'void boost::algorithm::detail::find_format_all_impl(InputT&, FinderT, FormatterT, FindResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >]'
+/Users/caprice/local/include/boost/algorithm/string/find_format.hpp:272:67:   required from 'void boost::algorithm::find_format_all(SequenceT&, FinderT, FormatterT) [with SequenceT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >]'
+/Users/caprice/local/include/boost/algorithm/string/replace.hpp:657:61:   required from 'void boost::algorithm::replace_all(SequenceT&, const Range1T&, const Range2T&) [with SequenceT = const std::basic_string<char>; Range1T = char [2]; Range2T = char [2]]'
+../include/detail/connection.hpp:9:81:   required from here
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:36:30: error: assignment of read-only location 'OutputIt.__gnu_cxx::__normal_iterator<_Iterator, _Container>::operator*<const char*, std::basic_string<char> >()'
+                     *OutputIt=Storage.front();
+                              ^
+In file included from /Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/vector:60:0,
+                 from example.cpp:3:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h: In instantiation of '_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = const char*; _OI = const char*]':
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:428:38:   required from '_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >; _OI = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >]'
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:460:17:   required from '_OI std::copy(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >; _OI = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >]'
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:88:76:   required from 'ForwardIteratorT boost::algorithm::detail::process_segment_helper<HasStableIterators>::operator()(StorageT&, InputT&, ForwardIteratorT, ForwardIteratorT, ForwardIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; InputT = const std::basic_string<char>; ForwardIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >; bool HasStableIterators = false]'
+/Users/caprice/local/include/boost/algorithm/string/detail/replace_storage.hpp:151:84:   required from 'ForwardIteratorT boost::algorithm::detail::process_segment(StorageT&, InputT&, ForwardIteratorT, ForwardIteratorT, ForwardIteratorT) [with StorageT = std::deque<char, std::allocator<char> >; InputT = const std::basic_string<char>; ForwardIteratorT = __gnu_cxx::__normal_iterator<const char*, std::basic_string<char> >]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:216:35:   required from 'void boost::algorithm::detail::find_format_all_impl2(InputT&, FinderT, FormatterT, FindResultT, FormatResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >; FormatResultT = boost::iterator_range<const char*>]'
+/Users/caprice/local/include/boost/algorithm/string/detail/find_format_all.hpp:265:47:   required from 'void boost::algorithm::detail::find_format_all_impl(InputT&, FinderT, FormatterT, FindResultT) [with InputT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >; FindResultT = boost::iterator_range<__gnu_cxx::__normal_iterator<const char*, std::basic_string<char> > >]'
+/Users/caprice/local/include/boost/algorithm/string/find_format.hpp:272:67:   required from 'void boost::algorithm::find_format_all(SequenceT&, FinderT, FormatterT) [with SequenceT = const std::basic_string<char>; FinderT = boost::algorithm::detail::first_finderF<const char*, boost::algorithm::is_equal>; FormatterT = boost::algorithm::detail::const_formatF<boost::iterator_range<const char*> >]'
+/Users/caprice/local/include/boost/algorithm/string/replace.hpp:657:61:   required from 'void boost::algorithm::replace_all(SequenceT&, const Range1T&, const Range2T&) [with SequenceT = const std::basic_string<char>; Range1T = char [2]; Range2T = char [2]]'
+../include/detail/connection.hpp:9:81:   required from here
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:390:70: error: no matching function for call to 'std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m(const char*&, const char*&, const char*&)'
+                        _Category>::__copy_m(__first, __last, __result);
+                                                                      ^
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:390:70: note: candidate is:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:368:9: note: template<class _Tp> static _Tp* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(const _Tp*, const _Tp*, _Tp*) [with _Tp = _Tp; bool _IsMove = false]
+         __copy_m(const _Tp* __first, const _Tp* __last, _Tp* __result)
+         ^
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:368:9: note:   template argument deduction/substitution failed:
+/Users/caprice/local/gcc-4.8.0/include/c++/4.8.0/bits/stl_algobase.h:390:70: note:   deduced conflicting types for parameter '_Tp' ('char' and 'const char')
+                        _Category>::__copy_m(__first, __last, __result);
+                                                                      ^
+In file included from ../include/sqlitexx.hpp:9:0,
+                 from example.cpp:6:
+../include/exception.hpp: In function 'const std::error_category& caprice::sqlitexx::sqlite3_error_category()':
+../include/exception.hpp:45:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+In file included from ../include/binder.hpp:12:0,
+                 from ../include/sqlitexx.hpp:13,
+                 from example.cpp:6:
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, std::nullptr_t)':
+../include/detail/bind-helper.hpp:17:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, double)':
+../include/detail/bind-helper.hpp:22:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int)':
+../include/detail/bind-helper.hpp:27:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, int64_t)':
+../include/detail/bind-helper.hpp:35:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const caprice::sqlitexx::blob_type&)':
+../include/detail/bind-helper.hpp:45:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../include/detail/bind-helper.hpp: In function 'caprice::sqlitexx::bounded_function_type caprice::sqlitexx::do_bind(caprice::sqlitexx::sql_statement_type, const sql_string&)':
+../include/detail/bind-helper.hpp:55:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+In file included from ../include/exception.hpp:7:0,
+                 from ../include/sqlitexx.hpp:9,
+                 from example.cpp:6:
+/Users/caprice/local/include/boost/system/error_code.hpp: At global scope:
+/Users/caprice/local/include/boost/system/error_code.hpp:214:36: warning: 'boost::system::posix_category' defined but not used [-Wunused-variable]
+     static const error_category &  posix_category = generic_category();
+                                    ^
+/Users/caprice/local/include/boost/system/error_code.hpp:215:36: warning: 'boost::system::errno_ecat' defined but not used [-Wunused-variable]
+     static const error_category &  errno_ecat     = generic_category();
+                                    ^
+/Users/caprice/local/include/boost/system/error_code.hpp:216:36: warning: 'boost::system::native_ecat' defined but not used [-Wunused-variable]
+     static const error_category &  native_ecat    = system_category();
+                                    ^

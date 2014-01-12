@@ -9,36 +9,36 @@
 
 namespace caprice {  namespace sqlitexx {
 
-typedef std::function<void (const int)> bounded_function_type;
+typedef std::function<int (const int)> bounded_function_type;
 
 bounded_function_type
  do_bind(sql_statement_type stmt_, std::nullptr_t /* tag */) noexcept {
-    return std::bind(::sqlite3_bind_null, stmt_.get(), _1);
+    return std::bind(::sqlite3_bind_null, stmt_.get(), std::placeholders::_1);
 }
 
 bounded_function_type
  do_bind(sql_statement_type stmt_, const double val) noexcept {
-    return std::bind(::sqlite3_bind_double, stmt_.get(), _1, val);
+    return std::bind(::sqlite3_bind_double, stmt_.get(), std::placeholders::_1, val);
 }
 
 bounded_function_type
  do_bind(sql_statement_type stmt_, const int val) noexcept {
-    return std::bind(::sqlite3_bind_int, stmt_.get(), _1, val);
+    return std::bind(::sqlite3_bind_int, stmt_.get(), std::placeholders::_1, val);
 }
 
 bounded_function_type
  do_bind(sql_statement_type stmt_, const std::int64_t val) noexcept {
     return std::bind(::sqlite3_bind_int64,
                      stmt_.get(),
-                     _1,
+                     std::placeholders::_1,
                      static_cast<::sqlite3_int64>(val));
 }
 
 bounded_function_type
- do_bind(sql_statement_type stmt_, const blob_type& val) noexcept {
+ do_bind(sql_statement_type stmt_, blob_type& val) noexcept {
     return std::bind(::sqlite3_bind_blob,
                      stmt_.get(),
-                     _1,
+                     std::placeholders::_1,
                      val.value(),
                      val.size(),
                      SQLITE_TRANSIENT);
@@ -48,9 +48,9 @@ bounded_function_type
  do_bind(sql_statement_type stmt_, const sql_string& val) noexcept {
     return std::bind(::sqlite3_bind_text,
                      stmt_.get(),
-                     _1,
+                     std::placeholders::_1,
                      val.c_str(),
-                     val.size() * sizeof(sql_string::char_type),
+                     val.size() * sizeof(sql_string::value_type),
                      SQLITE_TRANSIENT);
 }
 
@@ -59,9 +59,7 @@ bounded_function_type
 
 template <typename T>
 bounded_function_type
- do_bind(sql_statement_type stmt_, T val) noexcept {
-    static_assert(false, "SQLite does't have the function that takes a type `T'");
-}
+ do_bind(sql_statement_type stmt_, T val) = delete;
 
 } }
 

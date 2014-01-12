@@ -2,34 +2,31 @@
 #define CAPRICE_SQLITEXX_RESULT_SET_HPP
 
 #include <vector>
-#include <tuple>
 #include <stdexcept>
-#include <type_traits>
 
 #include <boost/fusion/container.hpp>
-#include <boost/optional.hpp>
 
 #include "deftypes.hpp"
 
 namespace caprice { namespace sqlitexx {
 
 /** @brief
- *  @tparam ColumnType1
  *  @tparam ColumnTypes
  *  @note result-set is immutable.
  */
-template <typename ColumnType, typename ...ColumnTypes>
+template <typename ...ColumnTypes>
 class result_set_impl {
 public:
-    typedef result_set_impl<ColumnType, ColumnTypes...> self_type;
+    typedef result_set_impl<ColumnTypes...> self_type;
     
-    typedef boost::fusion::vector<ColumnType, ColumnTypes...> row_type;
+    typedef boost::fusion::vector<ColumnTypes...> row_type;
+    
     typedef std::vector<row_type> result_set_object_type;
     typedef std::size_t size_type;
     
     template <int ColumnIdx>
     using value_type
-        = std::tuple_element<ColumnIdx, std::tuple<ColumnType, ColumnTypes...>>::type;
+        = typename std::tuple_element<ColumnIdx, std::tuple<ColumnTypes...>>::type;
     
     template <int RowIdx, int ColumnIdx>
     using element_type = value_type<ColumnIdx>;
@@ -45,26 +42,6 @@ public:
 
     /// @brief destructor.
     ~result_set_impl() {}
-    
-    /** @brief
-     *  @tparam RowIdx
-     *  @tparam ColumnIdx
-     */
-    template <int RowIdx, int ColumnIdx>
-    value_type<ColumnIdx> at() const {
-        static_assert(ColumnIdx < column_size(), "`ColumnIdx' is out of range.");
-        return boost::fusion::at_c<ColumnIdx>(container.at(RowIdx));
-    }
-    
-    /** @brief
-     *  @tparam RowIdx
-     *  @tparam ColumnIdx
-     */
-    template <int RowIdx, int ColumnIdx>
-    value_type<ColumnIdx> operator[]() const noexcept {
-        static_assert(ColumnIdx < column_size(), "`ColumnIdx' is out of range.");
-        return boost::fusion::at_c<ColumnIdx>(container[RowIdx]);
-    }
     
     /** @brief
      *  @param row_idx
@@ -123,7 +100,7 @@ public:
     size_type row_size() const { return container.size(); }
     
     /// @brief
-    constexpr size_type column_size() const { return sizeof(...ColumnTypes) + 1; }
+    constexpr size_type column_size() const { return sizeof...(ColumnTypes) + 1; }
     
     /// @brief
     bool empty() const { return container.empty(); }
@@ -132,17 +109,34 @@ private:
     result_set_object_type container;
 };
 
-template <>
-class result_set_impl <void> { typedef void self_type; }
+template <typename ...T>
+class result_set_impl<void, T...> {
+public:
+    typedef void self_type;
+};
 
 template <>
-class result_set_impl<> { typedef void self_type; }
+class result_set_impl<> {
+public:
+    typedef void self_type;
+};
 
 template <typename ...T>
-using result_set = result_set_impl<T...>::self_type;
+using result_set = typename result_set_impl<T...>::self_type;
 
 template <typename ...T>
-using maybe<result_set<T...>> maybe_result_set;
+using maybe_result_set = maybe<result_set<T...>> ;
+    
+template <typename T>
+constexpr bool is_void() { return std::is_same<void, T>::value; }
+    
+template <typename ...T>
+using enable_if_maybe_result_set_is_void
+    = typename std::enable_if<is_void<maybe_result_set<T...>>()>::type;
+
+template <typename ...T>
+using disable_if_maybe_result_set_is_void
+    = typename std::enable_if<!is_void<maybe_result_set<T...>>()>::type;
 
 } }
 

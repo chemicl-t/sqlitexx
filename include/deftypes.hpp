@@ -5,28 +5,32 @@
 #include <sqlite3.h>
 
 #include <memory>
+#include <tuple>
+#include <type_traits>
 
 #include <boost/optional.hpp>
 
 #include "string.hpp"
 
-#ifdef __APPLE__
-/// TODO: move it to `fixinclude/sqlite3.h'
-extern "C" int sqlite3_open_v2(const char *, sqlite3 **, int, const char *);
-extern "C" int sqlite3_close_v2(sqlite3 *);
-#endif
-
 namespace caprice { namespace sqlitexx {
 
-    template <typename T, typename ...U>
-    struct maybe_helper { typedef boost::optional<T> self_type; };
+    /* section of defining `maybe<T>' */
+    template <typename ...T>
+    struct maybe_helper {
+        typedef boost::optional<typename std::tuple_element<0, std::tuple<T...>>::type> first_element;
+        typedef first_element self_type;
+    };
     
-    template <typename ...U>
-    struct maybe_helper <void, U...> { typedef void self_type; };
+    template <typename ...T>
+    struct maybe_helper <void, T...> { typedef void self_type; };
+    
+    template <>
+    struct maybe_helper<> { typedef void self_type; };
     
     template <typename ...T>
     using maybe = typename maybe_helper<T...>::self_type;
     
+    /* section of type definition */
     typedef ::sqlite3 raw_db_object_type;
     typedef ::sqlite3_stmt raw_sql_statement_type;
     
@@ -48,7 +52,7 @@ namespace caprice { namespace sqlitexx {
         
         blob_type(value_type v, std::size_t sz) {
             //std::copy()
-            static_assert(false, "this object have not implemented completely yet.");
+            //static_assert(false, "this object have not implemented completely yet.");
         }
         
         ~blob_type() {
@@ -69,6 +73,8 @@ namespace caprice { namespace sqlitexx {
     // use at `detail/binder_impl.hpp'
     class noexcept_tag {};
     class except_tag {};
+    
+    
 } }
 
 #endif // CAPRICE_SQLITEXX_DEFTYPES_HPP

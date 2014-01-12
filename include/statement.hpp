@@ -38,7 +38,15 @@ public:
      *  @retval 
      */
     template <typename ...ColumnTypes>
-    maybe_result_set<ColumnTypes...> execute(const sql_string& src, boost::system::error_code& ec) noexcept;
+    maybe_result_set<ColumnTypes...>
+    execute(const sql_string& src,
+            boost::system::error_code& ec,
+            disable_if_maybe_result_set_is_void<ColumnTypes...>* = 0) noexcept;
+    
+    template <typename ...ColumnTypes>
+    void execute(const sql_string& src,
+                 boost::system::error_code& ec,
+                 enable_if_maybe_result_set_is_void<ColumnTypes...>* = 0) noexcept;
     
     /** @brief execute SQL statement.
      *  @warning when you pass multi SQL statements at once, the result is undefined.
@@ -46,7 +54,13 @@ public:
      *  @retval 
      */
     template <typename ...ColumnTypes>
-    maybe_result_set<ColumnTypes...> execute(const sql_string& src);
+    maybe_result_set<ColumnTypes...>
+    execute(const sql_string& src,
+            disable_if_maybe_result_set_is_void<ColumnTypes...>* = 0);
+    
+    template <typename ...ColumnTypes>
+    void execute(const sql_string& src,
+                 enable_if_maybe_result_set_is_void<ColumnTypes...>* = 0);
     
     /// @brief return database object.
     db_object_type get_db_object() { return db; }
@@ -66,7 +80,7 @@ typedef maybe<statement> maybe_statement;
  */
 maybe_compiled_statement
  compile_statement(statement& stmt,
-                  const sql_string& src,
+                   const sql_string& src,
                    boost::system::error_code& ec) noexcept {
     return stmt.compile(src, ec);
 }
@@ -88,8 +102,23 @@ maybe_compiled_statement
  */
 template <typename ...ColumnTypes>
 maybe_result_set<ColumnTypes...>
- execute_statement(statement& stmt, const sql_string& src, boost::system::error_code& ec) noexcept {
+ execute_statement(
+    statement& stmt,
+    const sql_string& src,
+    boost::system::error_code& ec,
+    disable_if_maybe_result_set_is_void<ColumnTypes...>* = 0
+ ) noexcept {
     return stmt.template execute<ColumnTypes...>(src, ec);
+}
+
+template <typename ...ColumnTypes>
+void execute_statement(
+    statement& stmt,
+    const sql_string& src,
+    boost::system::error_code& ec,
+    enable_if_maybe_result_set_is_void<ColumnTypes...>* = 0
+ ) noexcept {
+    stmt.template execute<ColumnTypes...>(src, ec);
 }
 
 /** @brief
@@ -100,8 +129,21 @@ maybe_result_set<ColumnTypes...>
  */
 template <typename ...ColumnTypes>
 maybe_result_set<ColumnTypes...>
- execute_statement(statement& stmt, const sql_string& src) {
+ execute_statement(
+    statement& stmt,
+    const sql_string& src,
+    disable_if_maybe_result_set_is_void<ColumnTypes...>* = 0
+ ) {
     return stmt.template execute<ColumnTypes...>(src);
+}
+
+template <typename ...ColumnTypes>
+void execute_statement(
+    statement& stmt,
+    const sql_string& src,
+    enable_if_maybe_result_set_is_void<ColumnTypes...>* = 0
+ ) {
+    stmt.template execute<ColumnTypes...>(src);
 }
 
 } }

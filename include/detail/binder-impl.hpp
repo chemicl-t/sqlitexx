@@ -25,62 +25,37 @@ class binder_impl {
 template <>
 class binder_impl<noexcept_tag> final {
 public:
-    /** @brief 
+    typedef binder_impl<noexcept_tag> self_type;
+    
+    /** @brief
      *  @param parent
      *  @param stmt
      *  @param ec[out]
      */
-    binder_impl(binder& parent, sql_statement_type stmt, boost::system::error_code& ec)
-        : parent_(parent), stmt_(stmt), cause(ec) noexcept {}
+    binder_impl(sql_statement_type stmt, boost::system::error_code& ec) noexcept
+        : stmt_(stmt), cause(ec)  {}
     
     /// @brief destructor.
     ~binder_impl() {}
     
-    /** @brief bind a value with a parameter.
-     *  @param value[in] value of the parameter.
-     */
-    template <typename Arg, typename ...Args>
-    void operator()(const Arg value,
-                    const Args... v) noexcept {
-        (*this)[value];
-        return (*this)(v...);
-    }
-    
-    /** @brief bind a value with a parameter.
-     *  @param value[in] value of the parameter
-     */
-    template <typename Arg>
-    void operator()(const Arg value) noexcept {
-        (*this)[value];
-    }
-    
     /** @brief bind a value with a named-parameter.
      *  @param parameter_name parameter name.
      *  @param val[in] value of the named-parameter.
      */
     template <typename T>
-    binder& operator[](const u8_string& parameter_name, T val) noexcept {
-        param_idx = ::sqlite3_bind_parameter_index(stmt, parameter_name.c_str());
-        return (*this)[val];
-    }
-    
-    /** @brief bind a value with a named-parameter.
-     *  @param parameter_name parameter name.
-     *  @param val[in] value of the named-parameter.
-     */
-    template <typename T>
-    binder& operator[](const int parameter_id, T val) noexcept {
-        return (*this)[std::to_string(parameter_id), val];
-    }
-    
-    /** @brief
-     *  @param val[int]
-     */
-    template <typename T>
-    binder& operator[](T val) noexcept {
+    self_type& operator()(const u8_string& parameter_name, T val) noexcept {
+        auto param_idx = ::sqlite3_bind_parameter_index(stmt_.get(), parameter_name.c_str());
         bind(param_idx, val);
-        ++param_idx;
         return (*this);
+    }
+    
+    /** @brief bind a value with a named-parameter.
+     *  @param parameter_name parameter name.
+     *  @param val[in] value of the named-parameter.
+     */
+    template <typename T>
+    self_type& operator()(const int parameter_id, T val) noexcept {
+        return (*this)(std::to_string(parameter_id), val);
     }
     
     /// @brief
@@ -88,43 +63,26 @@ public:
 
 private:
     template <typename T>
-    void bind(const int parameter_idx, T val, boost::system::error_code& ec) noexcept {
-        if(!check_result(do_bind(parameter_idx))) {
+    void bind(const int parameter_idx, T val) noexcept {
+        auto bound_func = do_bind(stmt_, val);
+        if(!check_result(bound_func(parameter_idx))) {
             // ec...
         }
     }
 
-    boost::error_code& cause;
-    binder& parent_;
+    boost::system::error_code& cause;
     sql_statement_type stmt_;
-    int param_idx;
 };
 
 template <>
 class binder_impl<except_tag> final {
 public:
+    typedef binder_impl<except_tag> self_type;
+    
     /// @brief 
-    binder_impl(binder& parent, sql_statement_type stmt)
-        : parent_(parent), stmt_(stmt) {}
+    binder_impl(sql_statement_type stmt) : stmt_(stmt) {}
     /// @brief
     ~binder_impl() {}
-    
-    /** @brief bind a value with a parameter.
-     *  @param value[in] value of the parameter.
-     */
-    template <typename Arg, typename ...Args>
-    void operator()(const Arg value, const Args... v) {
-        (*this)[value];
-        return (*this)(v...);
-    }
-    
-    /** @brief bind a value with a parameter.
-     *  @param value[in] value of the parameter.
-     */
-    template <typename Arg>
-    void operator()(const Arg value) {
-        (*this)[value];
-    }
     
     /** @brief bind a value with a named-parameter.
      *  @tparam T
@@ -132,9 +90,10 @@ public:
      *  @param val[in] value of the named-parameter.
      */
     template <typename T>
-    binder& operator[](const u8_string& parameter_name, T val) {
-        param_idx = ::sqlite3_bind_parameter_index(stmt, parameter_name.c_str());
-        return (*this)[val];
+    self_type& operator()(const u8_string& parameter_name, T val) {
+        auto param_idx = ::sqlite3_bind_parameter_index(stmt_.get(), parameter_name.c_str());
+        bind(param_idx, val);
+        return (*this);
     }
     
     /** @brief bind a value with a named-parameter.
@@ -143,20 +102,8 @@ public:
      *  @param val[in] value of the named-parameter.
      */
     template <typename T>
-    binder& operator[](const int parameter_id, T val) {
-        auto result = (*this)[std::to_string(parameter_id), val];
-        return result;
-    }
-    
-    /** @brief
-     *  @tparam T
-     *  @param val
-     */
-    template <typename T>
-    binder& operator[](T val) {
-        bind(param_idx, val);
-        ++param_idx;
-        return (*this);
+    self_type& operator()(const int parameter_id, T val) {
+        return (*this)(std::to_string(parameter_id), val);
     }
     
     /// @brief
@@ -165,14 +112,17 @@ public:
 private:
     template <typename T>
     void bind(const int parameter_idx, T val) {
-        if(!check_result(do_bind(parameter_idx))) {
+        auto bound_func = do_bind(stmt_, val);
+        if(!check_result(bound_func(parameter_idx))) {
             // ec...
         }
     }
     
-    binder& parent_;
+    void bind(const int parameter_idx, const sql_char *val) {
+        bind(parameter_idx, sql_string(val));
+    }
+    
     sql_statement_type stmt_;
-    int param_idx;
 };
 
 

@@ -29,7 +29,7 @@ public:
      *  @throw .
      */
     explicit connection(const sql_string& absolute_path) {
-        boost::error_code ec;
+        boost::system::error_code ec;
         throw_error_code(open(absolute_path, ec), ec);
     }
 
@@ -37,7 +37,7 @@ public:
      *         @link open(const sql_string&, const boost::error_code&) @endlink
      *         explicitly.
      */
-    connection() : opened(false) noexcept {}
+    connection() noexcept : opened(false) {}
 
     /// @brief destructor. the dtor call @link close() @endlink automatically.
     ~connection() { close(); }
@@ -49,7 +49,7 @@ public:
      *  @retval true success to open the file.
      *          false fail to open the file.
      */
-    bool open(const sql_string& absolute_path, boost::system::error_code& ec) noexcept;
+    bool open(const sql_string& absolute_path_to_db_file, boost::system::error_code& ec) noexcept;
     
     /** @brief this function is nearly same as 
      *         @link open(const sql_string&, const boost::error_code&) @endlink.
@@ -61,7 +61,7 @@ public:
      *          false fail to open the file. this function throw more detailed information about the failure.
      */
     bool open(const sql_string& absolute_path) {
-        boost::error_code ec;
+        boost::system::error_code ec;
         return opened = throw_error_code(open(absolute_path, ec), ec);
     }
 
@@ -71,19 +71,19 @@ public:
      *          false fail to close the file.
      */
     bool close() noexcept {
-        if(opened) { opened = check_result(::sqlite3_close_v2(db)); }
-        return opened;
+        /// @todo std::shared_ptr<...>.get() ?
+        return true;
     }
 
     /** @brief checking the database file is opened or not.
      *  @retval true the file is opened.
      *          false the file is not opened. 
      */
-    bool is_opened() noexcept const { return opened; }
+    bool is_opened() const noexcept { return opened; }
 
     /// @brief return the text that discribes error.
-    const sql_char *get_error_message() noexcept const {
-        return ::sqlite3_errmsg(db);
+    const sql_char *get_error_message() const noexcept {
+        return ::sqlite3_errmsg(db.get());
     }
 
     /// @brief return database object.

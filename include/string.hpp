@@ -9,23 +9,30 @@
 #include <string>
 #include <boost/utility/string_ref.hpp>
 
+namespace caprice { namespace sqlitexx {
+    
+    typedef char u8_char;
+    typedef char16_t u16_char;
+    
+    typedef std::basic_string<u8_char> u8_string;
+    typedef std::basic_string<u16_char> u16_string;
+
+} }
+
 #ifdef LIBSQLITEXX_USE_UTF8_STRING
 
 namespace caprice { namespace sqlitexx {
 
-    typedef char u8_char;
     typedef u8_char sql_char;
 
     #define _sqlSTR(str) (u8##str)
 
 } }
 
-
 #elif LIBSQLITEXX_USE_UTF16_STRING
 
 namespace caprice { namespace sqlitexx {
     
-    typedef char16_t u16_char;
     typedef u16_char sql_char;
 
     #define _sqlSTR(str) (u16##str)

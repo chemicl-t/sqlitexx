@@ -12,12 +12,12 @@ class column_iterator {
      *  @note
      */
     explicit
-    column_iterator(result_set_object_type::iterator& set_itr)
+    column_iterator(typename result_set_object_type::iterator& set_itr)
         : itr(set_itr) {}
     
 public:
     /// @brief define `value_type' which indicates result_set
-    typedef result_set::value_type<ColumnIdx> value_type;
+    typedef result_set_impl::value_type<ColumnIdx> value_type;
     /// @brief define `self_type'.
     typedef column_iterator<ColumnIdx> self_type;
     /// @brief default constructor is deleted.
@@ -69,7 +69,7 @@ public:
     bool operator!=(const self_type& other) const { return itr != other.itr; }
     
 private:
-    result_set_object_type::iterator itr;
+    typename result_set_object_type::iterator itr;
 };
 
 #endif // CAPRICE_SQLITEXX_COLUMN_ITERATOR_HPP

@@ -10,11 +10,11 @@
 #include "deftypes.hpp"
 
 namespace caprice { namespace sqlitexx {
-
+/*
 class sqlite3_error_category : public std::error_category {
     const char* name() const noexcept override { return "sqlite3"; }
 
-    std::string message(int ev) const override { return ::sqlite3_errmsg(ev); }
+    std::string message(int ev) const override { return ::sqlite3_errstr(ev); }
     
     std::error_condition default_error_condition(int ev) const noexcept override {
         switch (ev) {
@@ -39,11 +39,19 @@ class sqlite3_error_category : public std::error_category {
     }
 };
 
+#if (BOOST_CLANG == 1)
+    #define thread_local __thread
+#endif
+
 const std::error_category& sqlite3_error_category() {
-    static thread_local const sqlite3_error_category category;
+    static thread_local const class sqlite3_error_category category;
     return category;
 }
 
+#if (BOOST_CLANG == 1)
+    #undef thread_local
+#endif
+*/
 bool check_result(const int result) noexcept {
     return (result == SQLITE_OK);
 }

@@ -3,10 +3,10 @@
 #define CAPRICE_SQLITEXX_BINDER_HPP
 
 #include <cstdint>
-#include <type_traits>
 
 #include "deftypes.hpp"
 #include "string.hpp"
+
 #include "compiled-statement.hpp"
 
 #include "detail/bind-helper.hpp"
@@ -21,14 +21,14 @@ public:
     ~binder() { reset(); }
     
     noexcept_binder begin(boost::system::error_code& ec) noexcept {
-        return noexcept_binder(*this, stmt.stmt, ec);
+        return noexcept_binder(stmt.stmt, ec);
     }
     
     except_binder begin() {
-        return except_binder(*this, stmt.stmt);
+        return except_binder(stmt.stmt);
     }
     
-    void reset() noexcept { ::sqlite3_clear_bindings(stmt.stmt); }
+    void reset() noexcept { ::sqlite3_clear_bindings(stmt.stmt.get()); }
 
 private:
     compiled_statement stmt;

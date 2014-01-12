@@ -43,7 +43,7 @@ int main() {
     }
     
     try {
-        // cf: line 29.
+        // cf: line 37.
         sqlite::binder(*compiled)
             .begin()
                 (u8"name", u8"boooooo!")(u8"id", 0)
